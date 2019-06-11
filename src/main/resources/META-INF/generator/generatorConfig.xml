@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- Reference: http://www.mybatis.org/generator/index.html -->
+<generatorConfiguration>
+    <context id="MySQLTables" targetRuntime="MyBatis3">
+        <property name="useActualColumnNames" value="true" />
+        <!-- 设置java文件编码格式 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表； 一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖 -->
+		<property name="autoDelimitKeywords" value="false" />
+		<!-- 格式化java代码 -->
+		<property name="javaFormatter"
+			value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+		<!-- 格式化XML代码 -->
+		<property name="xmlFormatter"
+			value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+		
+        <!--=====================-->
+        <!-- 生成共通属性配置，是否生成注释 -->
+        <!--=====================-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+        <!-- <commentGenerator>
+            <property name="suppressDate" value="false" />
+            <property name="suppressAllComments" value="false" />
+        </commentGenerator> -->
+        
+        <!-- 自定义实体，生成实体类属性注解与注释，对应jpa -->
+        <commentGenerator type="com.leiyide.config.CustomCommentGenerator">
+        </commentGenerator>
+        
+        <!--===============-->
+        <!-- MySQL数据源配置 -->
+        <!--===============-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+            connectionURL="jdbc:mysql://127.0.0.1:3306/vking_shmh?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"
+            userId="root" password="password">
+            <!-- 避免同名表加载数据 -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+         </jdbcConnection>  
+
+        <javaModelGenerator targetPackage="com.leiyide.data.domain.model"
+            targetProject="mybatis-plus-test/src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"
+            targetProject="mybatis-plus-test/src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.leiyide.data.domain.mapper"
+            targetProject="mybatis-plus-test/src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--===============-->
+        <!-- 生成的业务表配置 -->
+        <!--===============-->
+        <table tableName="vk_user" domainObjectName="VkUser"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <!--<property name="useActualColumnNames" value="true" />
+            <columnOverride column="isAdmin" property="admin" javaType="java.lang.Boolean" typeHandler="com.neusoft.inkstone.framework.infras.data.mybatis.BooleanTypeHandler" />
+            <columnOverride column="isOnJob" property="onJob" javaType="java.lang.Boolean" typeHandler="com.neusoft.inkstone.framework.infras.data.mybatis.BooleanTypeHandler" />
+            <columnOverride column="isDeleted" property="deleted" javaType="java.lang.Boolean" typeHandler="com.neusoft.inkstone.framework.infras.data.mybatis.BooleanTypeHandler" />
+            <columnOverride column="isUuasSync" property="uuasSync" javaType="java.lang.Boolean" typeHandler="com.neusoft.inkstone.framework.infras.data.mybatis.BooleanTypeHandler" /> -->
+        </table>
+
+    </context>
+</generatorConfiguration>
