@@ -18,10 +18,51 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
   </resultMap>
+  
+  <!-- 测试字段取别名 -->
+  <resultMap id="TestResultMap" type="com.leiyide.data.domain.model.VkUser">
+    <id column="userId" jdbcType="INTEGER" property="userId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="deptId" jdbcType="INTEGER" property="deptId" />
+    <result column="loginTime" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="loginIp" jdbcType="VARCHAR" property="loginIp" />
+    <result column="createUser" jdbcType="INTEGER" property="createUser" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateUser" jdbcType="INTEGER" property="updateUser" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+  </resultMap>
+  
   <sql id="Base_Column_List">
     user_id, user_name, password, sex, phone, email, status, dept_id, login_time, login_ip, 
     create_user, create_time, update_user, update_time, salt
   </sql>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="TestResultMap">
+    select  
+    user_id as userId,
+    user_name as userName,
+    password, 
+    sex,
+    phone,
+    email, 
+    status,
+    dept_id as deptId,
+    login_time as loginTime,
+    login_ip as loginIp, 
+    create_user as createUser, 
+    create_time as createTime, 
+    update_user as updateUser, 
+    update_time as updateTime,
+    salt 
+    from vk_user 
+    where user_name = #{userName}
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -15,4 +15,7 @@ public interface VkUserMapper extends BaseMapper<VkUser>{
     int updateByPrimaryKeySelective(VkUser record);
 
     int updateByPrimaryKey(VkUser record);
+    
+    
+    VkUser selectByName(String userName);
 }

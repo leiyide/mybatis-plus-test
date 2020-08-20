@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.toolkit.StringUtils;
 import com.leiyide.data.domain.mapper.VkUserMapper;
 import com.leiyide.data.domain.model.VkUser;
 import com.leiyide.data.domain.service.VkUserService;
@@ -36,4 +37,10 @@ public class VkUserServiceImpl extends ServiceImpl<VkUserMapper, VkUser> impleme
 		return userId != null ? vkUserMapper.selectByPrimaryKey(userId) : null;
 	}
 	
+	public VkUser selectByName(String userName) {
+		if (StringUtils.isNotEmpty(userName)) {
+			return vkUserMapper.selectByName(userName);
+		}
+		return null;
+	}
 }

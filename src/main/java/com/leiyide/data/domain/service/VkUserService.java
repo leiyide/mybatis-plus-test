@@ -22,4 +22,6 @@ public interface VkUserService extends IService<VkUser>{
 	 * @return
 	 */
 	VkUser selectByPrimaryKey(Integer userId);
+	
+	VkUser selectByName(String userName);
 }
