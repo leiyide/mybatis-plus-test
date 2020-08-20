@@ -7,7 +7,7 @@
 ///**
 // * @Title:FileUtil
 // * @Description:   文件资源工具类
-// * @Company: 维坤智能科技 
+// * @Company: 智能科技 
 // * @version v0.1
 // * @author leiyide
 // * @date 2019年12月18日 下午8:13:10
